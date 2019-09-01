@@ -35,12 +35,12 @@ These are the following issues that I encountered while trying to setup the envi
 
 - `localhost:8080` not showing any content:
 
-  > There was just a small issue with the docker-compose where the binding of the host machine to the exposed port was not syntacticaly correct. In order to troubleshoot this, I just had to take a peek at how the mapping was setup in docker-compose.yml and in the nginx conf file.
+   There was just a small issue with the docker-compose where the binding of the host machine to the exposed port was not      syntacticaly correct. In order to troubleshoot this, I just had to take a peek at how the mapping was setup in docker-      compose.yml and in the nginx conf file.
 
 - Clicking the submit button in index.html re-directing to `localhost,localhost:8080/success` instead of to `localhost:8080/success`:
 
-  > This was a tricky one. I didn't have much experience with nginx before this weekend, so I had to look at the nuances of how the proxying was handled within `conf.d/flaskapp.conf` directives. Going through the nginx docs and some quick lookup of http redirect issues with nginx on the web, I saw one of the headers being reset within the `location / {}` block.
+   This was a tricky one. I didn't have much experience with nginx before this weekend, so I had to look at the nuances of      how the proxying was handled within `conf.d/flaskapp.conf` directives. Going through the nginx docs and some quick lookup    of http redirect issues with nginx on the web, I saw one of the headers being reset within the `location / {}` block.
 
 - `localhost:8080/success` displaying a blank list of items:
 
-  > I did some server-side console logging for this within the `success` method in `app.py`. The strigifying of the returned query result from the postgres db was not being served correctly on the page. I could see that the db connection was successful and the items were being returned to the server, but the response back to the client of `str(results)` was not working out. I decided to jsonify this result instead to send back data in a more presentational way.
+   I did some server-side console logging for this within the `success` method in `app.py`. The strigifying of the returned    query result from the postgres db was not being served correctly on the page. I could see that the db connection was        successful and the items were being returned to the server, but the response back to the client of `str(results)` was not    working out. I decided to jsonify this result instead to send back data in a more presentational way.
